@@ -1,0 +1,15 @@
+pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
+plugins { id("com.facebook.react.settings") }
+extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
+rootProject.name = 'client'
+include ':app'
+includeBuild('../node_modules/@react-native/gradle-plugin')
+
+
+// Alternative filter to kill Expo references
+gradle.beforeProject { project ->
+    if (project.path.contains('expo')) {
+        project.enabled = false
+    }
+}
+

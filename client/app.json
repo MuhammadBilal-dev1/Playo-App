@@ -1,0 +1,12 @@
+{
+  "name": "client",
+  "displayName": "client",
+  "expo": {
+    "name": "Playo",
+    "slug": "playo-trading-app",
+    "version": "1.0.0",
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
