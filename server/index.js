@@ -12,8 +12,12 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 const DB_URL = process.env.MONGODB_URI;
-app.use(cors());
-
+app.use(
+  cors({
+    origin: "https://playo-web.vercel.app", // Apni frontend domain dalo
+    credentials: true,
+  }),
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -26,8 +30,10 @@ mongoose
   .then(console.log("✅ Connected To MongoDB"))
   .catch((error) => console.log("🔴 Error connecting to MongoDB", error));
 
-app.listen(port, () => {
-  console.log(`🌐 Server running on PORT: ${port}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`🌐 Server running on PORT: ${port}`);
+  });
+}
 
 export default app;

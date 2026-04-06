@@ -9,5 +9,10 @@
       "source": "/(.*)",
       "destination": "/client/$1"
     }
-  ]
+  ],
+  "functions": {
+    "server/index.js": {
+      "runtime": "vercel-node@latest"
+    }
+  }
 }
