@@ -12,7 +12,8 @@
   ],
   "functions": {
     "server/index.js": {
-      "runtime": "nodejs20.19.5"
+      "memory": 1024,
+      "maxDuration": 10
     }
   }
 }
