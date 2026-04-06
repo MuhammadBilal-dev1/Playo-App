@@ -33,7 +33,7 @@ const LoginScreen = () => {
     };
 
     axios.post(`${API_URL}/users/login`, user).then(response => {
-      console.log('response data: ', response.data);
+      
       
       const token = response.data.token;
       console.log("token",token)

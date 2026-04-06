@@ -15,4 +15,4 @@ const BASE_URL =
       : 'http://localhost:8000'
     : 'http://10.0.2.2:8000';
 
-export const API_URL = Platform.OS === 'web' ? `/api` : `${BASE_URL}/api`;
+export const API_URL = Platform.OS === 'web' ? `${BASE_URL}/api` : `${BASE_URL}/api`;

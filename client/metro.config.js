@@ -1,32 +1,15 @@
-const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
-const defaultConfig = getDefaultConfig(__dirname);
+const { getDefaultConfig } = require('expo/metro-config');
 const path = require('path');
 
-// Ye detection logic zyada strong hai
-const isWeb =
-  process.argv.some(arg => arg.includes('web')) ||
-  process.env.npm_lifecycle_event?.includes('web') ||
-  process.env.EXPO_PUBLIC_PLATFORM === 'web';
+const config = getDefaultConfig(__dirname);
 
-console.log('metro.config.js isWeb', isWeb);
+// Extensions setup
+config.resolver.sourceExts = [...config.resolver.sourceExts, 'web.js', 'web.ts', 'web.tsx'];
 
-const config = {
-  resolver: {
-    // Agar web hai to web extensions pehle, warna normal default list
-    sourceExts: isWeb
-      ? ['web.js', 'web.ts', 'web.tsx', ...defaultConfig.resolver.sourceExts]
-      : defaultConfig.resolver.sourceExts,
-
-    // YE LINE ERROR KHATAM KAREGI:
-    alias: isWeb
-      ? {
-          'react-native-maps': path.resolve(
-            __dirname,
-            'react-native-maps.web.js',
-          ),
-        }
-      : {},
-  },
+// Maps Fix for Web
+config.resolver.alias = {
+  ...config.resolver.alias,
+  'react-native-maps': path.resolve(__dirname, 'react-native-maps.web.js'),
 };
 
-module.exports = mergeConfig(defaultConfig, config);
+module.exports = config;
